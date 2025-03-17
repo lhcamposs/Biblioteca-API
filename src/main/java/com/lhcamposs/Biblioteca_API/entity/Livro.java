@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter @Setter @NoArgsConstructor
@@ -20,10 +22,18 @@ public class Livro implements Serializable {
     private Long id;
     @Column(name = "titulo", nullable = false, unique = true, length = 200)
     private String titulo;
-    @Column(name = "anopublicacao", nullable = false, length = 10)
+    @Column(name = "ano_publicacao", nullable = false, length = 10)
     private int anoPub;
     @Column(name = "isbn", nullable = false, length = 13)
     private String isbn;
+
+    @ManyToMany
+    @JoinTable(
+            name = "livro_autor",
+            joinColumns = @JoinColumn(name = "livro_id"),
+            inverseJoinColumns = @JoinColumn(name = "autor_id")
+    )
+    private List<Autor> autores = new ArrayList<>();
 
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
