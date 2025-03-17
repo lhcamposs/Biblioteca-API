@@ -35,6 +35,10 @@ public class Livro implements Serializable {
     )
     private List<Autor> autores = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "editora_id")
+    private Editora editora;
+
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
     @Column(name = "data_modificacao")
