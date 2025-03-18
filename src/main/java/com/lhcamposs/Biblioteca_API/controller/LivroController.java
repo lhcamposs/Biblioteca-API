@@ -7,12 +7,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("api/v1/livros")
 public class LivroController {
 
     private final LivroService livroService;
+
+    @GetMapping
+    public ResponseEntity<List<Livro>> getAll() {
+        List<Livro> books = livroService.buscarTodos();
+        return ResponseEntity.ok(books);
+    }
 
     @PostMapping
     public ResponseEntity<Livro> create(@RequestBody Livro livro) {
@@ -23,6 +31,12 @@ public class LivroController {
     @GetMapping("/{id}")
     public ResponseEntity<Livro> getById(@PathVariable Long id){
         Livro book = livroService.buscarPorId(id);
+        return  ResponseEntity.ok(book);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Livro> update(@PathVariable Long id, @RequestBody Livro livro){
+        Livro book = livroService.atualizarLivro(id, livro);
         return  ResponseEntity.ok(book);
     }
 }
