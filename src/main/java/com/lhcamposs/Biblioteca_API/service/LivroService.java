@@ -43,4 +43,7 @@ public class LivroService {
     }
 
 
+    public void deletar(Long id) {
+        livroRepository.deleteById(id);
+    }
 }
