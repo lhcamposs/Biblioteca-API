@@ -18,7 +18,7 @@ public class Autor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Long id;
     @Column(name = "nome", nullable = false, unique = true, length = 200)
     private String nome;
 
